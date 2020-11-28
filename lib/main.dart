@@ -4,7 +4,6 @@ import './partials/quoteCard.dart';
 
 void main() => runApp(MaterialApp(
       home: QuoteScreen(),
-      // debugShowMaterialGrid: true,
       debugShowCheckedModeBanner: false,
     ));
 
@@ -40,7 +39,6 @@ class QuoteList extends StatefulWidget {
 }
 
 class _QuoteListState extends State<QuoteList> {
-
   List<Quote> quotes = [
     Quote(
         content: 'Be yourself; everyone else is already taken',
@@ -56,7 +54,15 @@ class _QuoteListState extends State<QuoteList> {
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: quotes.map((quote) => QuoteCard(quote: quote)).toList(),
+      children: quotes
+          .map((quote) => QuoteCard(
+              quote: quote,
+              delete: () {
+                setState(() {
+                  quotes.remove(quote);
+                });
+              }))
+          .toList(),
     );
   }
 }

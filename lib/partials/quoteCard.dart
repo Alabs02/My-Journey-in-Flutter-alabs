@@ -4,7 +4,8 @@ import './lists.dart';
 class QuoteCard extends StatelessWidget {
 
   final Quote quote;
-  QuoteCard({ this.quote });
+  final Function delete;
+  QuoteCard({ this.quote, this.delete });
 
   @override
   Widget build(BuildContext context) {
@@ -14,21 +15,37 @@ class QuoteCard extends StatelessWidget {
       shadowColor: Colors.grey[700],
       child: Padding(
         padding: EdgeInsets.all(15.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              quote.content,
-              style: TextStyle(fontSize: 16.0, color: Colors.grey[800]),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            Text(
-              quote.author,
-              style: TextStyle(fontSize: 14.0, color: Colors.grey[500]),
-            ),
-          ],
+        child: Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                quote.content,
+                style: TextStyle(fontSize: 16.0, color: Colors.grey[800]),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Text(
+                quote.author,
+                style: TextStyle(fontSize: 14.0, color: Colors.grey[500]),
+              ),
+
+              FlatButton.icon(
+                onPressed: delete,
+                label: Text(
+                  'Delete Quote',
+                  style: TextStyle(
+                    color: Colors.red[400]
+                  ),
+                ),
+                icon: Icon(
+                  Icons.delete,
+                  color: Colors.red[400]
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
