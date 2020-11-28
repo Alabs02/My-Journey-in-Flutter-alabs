@@ -1,132 +1,67 @@
 import 'package:flutter/material.dart';
+import './partials/lists.dart';
 
-void main() => runApp(NinjaApp());
+void main() => runApp(MaterialApp(
+      home: QuoteList(),
+    ));
 
-class NinjaApp extends StatelessWidget {
+class QuoteList extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: NinjaScreen(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
+  _QuoteListState createState() => _QuoteListState();
 }
 
-class NinjaScreen extends StatelessWidget {
+class _QuoteListState extends State<QuoteList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[800],
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: Text(
-          'Ninja Card',
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            letterSpacing: 1.5,
-            fontSize: 20.0,
-            color: Colors.grey[300]
-          ),
+          'Awesome Quotes',
+          style: TextStyle(),
         ),
         centerTitle: true,
-        elevation: 0.0,
-        backgroundColor: Colors.grey[700],
+        backgroundColor: Colors.redAccent,
       ),
-      body: NinjaBody(),
+      body: Body(),
     );
   }
 }
 
-class NinjaBody extends StatelessWidget {
+class Body extends StatefulWidget {
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  List<Quote> quotes = [
+    Quote(
+        author: 'alabs',
+        content: 'Be yourself; everyone else is already taken'),
+    Quote(
+        author: 'alabs', content: 'I have nothing to declare except my genius'),
+    Quote(
+        author: 'alabs', content: 'The truth is rarely pure, and never simple'),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 0),
-      child: Column(
-        children: <Widget>[
-          Center(
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/skate.jpg'),
-              radius: 60.0,
-              backgroundColor: Colors.grey,
-            ),
+    return Column(
+      children: [
+        Container(
+          alignment: Alignment.center,
+          color: Colors.grey[400],
+          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+          margin: EdgeInsets.all(20.0),
+          child: Column(
+            children: quotes.map((quote) {
+              return Text(
+                '${quote.content} - ${quote.author}'
+              );
+            }).toList(),
           ),
-
-          SizedBox(height: 30.0,),
-
-          Divider(color: Colors.grey[100],),
-
-          SizedBox(height: 30.0),
-
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'NAME',
-                style: TextStyle(
-                  color: Colors.grey[500],
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15.0
-                ),
-              ),
-              
-              SizedBox(height: 10.0),
-
-              Text(
-                'Chun-Li',
-                style: TextStyle(
-                  color: Colors.amberAccent[400],
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25.0,
-                  letterSpacing: 2.0
-                ),
-              ),
-
-              SizedBox(height: 30.0),
-
-
-              Text(
-                'CURRENT NINJA LEVEL',
-                style: TextStyle(
-                  color: Colors.grey[500],
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15.0
-                ),
-              ),
-              
-              SizedBox(height: 10.0),
-
-              Text(
-                '8',
-                style: TextStyle(
-                  color: Colors.amberAccent[400],
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25.0
-
-                ),
-              ),
-
-              SizedBox(height: 30.0),
-
-              Row(children: [
-                Icon(
-                  Icons.mail,
-                  color: Colors.grey[400],
-                ),
-                SizedBox(width: 20.0),
-                Text(
-                  'alabson.inc@gmail.com',
-                  style: TextStyle(
-                    color: Colors.grey[500],
-                    fontSize: 15.0
-                  ),
-                ),
-              ],)
-
-            ]
-          ),
-
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
