@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import './partials/lists.dart';
+import './partials/quoteCard.dart';
 
 void main() => runApp(MaterialApp(
-      home: QuoteList(),
+      home: QuoteScreen(),
+      // debugShowMaterialGrid: true,
+      debugShowCheckedModeBanner: false,
     ));
 
-class QuoteList extends StatefulWidget {
+class QuoteScreen extends StatefulWidget {
   @override
-  _QuoteListState createState() => _QuoteListState();
+  _QuoteScreenState createState() => _QuoteScreenState();
 }
 
-class _QuoteListState extends State<QuoteList> {
+class _QuoteScreenState extends State<QuoteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,50 +21,42 @@ class _QuoteListState extends State<QuoteList> {
       appBar: AppBar(
         title: Text(
           'Awesome Quotes',
-          style: TextStyle(),
+          style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.w600,
+              color: Colors.grey[200]),
         ),
         centerTitle: true,
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.redAccent[200],
       ),
-      body: Body(),
+      body: QuoteList(),
     );
   }
 }
 
-class Body extends StatefulWidget {
+class QuoteList extends StatefulWidget {
   @override
-  _BodyState createState() => _BodyState();
+  _QuoteListState createState() => _QuoteListState();
 }
 
-class _BodyState extends State<Body> {
+class _QuoteListState extends State<QuoteList> {
+
   List<Quote> quotes = [
     Quote(
-        author: 'alabs',
-        content: 'Be yourself; everyone else is already taken'),
+        content: 'Be yourself; everyone else is already taken',
+        author: 'Alabs'),
     Quote(
-        author: 'alabs', content: 'I have nothing to declare except my genius'),
+        content: 'Be yourself; everyone else is already taken',
+        author: 'Alabs'),
     Quote(
-        author: 'alabs', content: 'The truth is rarely pure, and never simple'),
+        content: 'Be yourself; everyone else is already taken',
+        author: 'Alabs'),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        Container(
-          alignment: Alignment.center,
-          color: Colors.grey[400],
-          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-          margin: EdgeInsets.all(20.0),
-          child: Column(
-            children: quotes.map((quote) {
-              return Text(
-                '${quote.content} - ${quote.author}'
-              );
-            }).toList(),
-          ),
-        ),
-      ],
+        children: quotes.map((quote) => QuoteCard(quote: quote)).toList(),
     );
   }
 }
